@@ -23,3 +23,18 @@ def validate_email(email):
 
 def validate_phone(phone):
     return re.match(r'^\d{8}$', phone) is not None
+
+def validate_username(username):
+    # check if username is unique and no distinquish between lowercase or uppercase letters
+
+    # no longer than 10 characters
+    if len(username) > 10: return False
+
+    # start with a letter or unerscore
+    if not username[0].isalpha() and username[0] != '_': return False
+
+    # can contain letters (a-z), numbers (0-9), underscores (_), apostrophes ('), and periods (.)
+    if not all(char.isalpha() or char.isdigit() or char in ['_', "'", '.'] for char in username): return False
+    
+def validate_password(password):
+    return False
