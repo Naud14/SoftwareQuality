@@ -63,3 +63,4 @@ def seed_database():
 
 def prepare_database():
     create_database()
+    seed_database()

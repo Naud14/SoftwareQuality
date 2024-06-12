@@ -19,7 +19,6 @@ def login():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
     
-    
     conn = get_connection()
     role = verify_login(conn, username, password)
     
