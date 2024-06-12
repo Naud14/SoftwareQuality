@@ -28,11 +28,11 @@ def add_member():
         if(validate_email(email)) : break
         else: print("Invalid email, please try again!")
     while(True):
-        street_name = input("Enter your street name")
-        house_number = input("Enter your house number")
-        zip_code = input("Enter your zipcode (DDDXX)")
+        street_name = input("Enter your street name: ")
+        house_number = input("Enter your house number: ")
+        zip_code = input("Enter your zipcode (DDDDXX): ")
         for place in cities: print(place)
-        city = input("Enter one of those cities")
+        city = input("Enter one of those cities: ")
         if (validate_address(street_name, house_number, zip_code, city)) : break 
         else: print("Invalid address, please try again!")
     while(True):

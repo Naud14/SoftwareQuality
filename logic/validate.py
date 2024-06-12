@@ -2,10 +2,6 @@ import re
 cities = ["Rotterdam", "Oldenzaal", "Budapest", "Kathmandu", "Moskou", "Lelystad", "Stockholm", "Ruinerwold", "Liverpool", "Penemunde"]
 
 
-def check_first_name(name):
-    return name.isalpha()
-
-
 def validate_age(age):
     return age.isdigit() and 0 < int(age) <= 125
 
@@ -33,17 +29,19 @@ def validate_phone(phone):
 
 
 def validate_username(username):
-    # check if username is unique and no distinquish between lowercase or uppercase letters
+    # TODO check if username is unique and no distinquish between lowercase or uppercase letters
 
     # no longer than 10 characters
     if len(username) > 10: return False
+    if len(username) < 8: return False
 
     # start with a letter or unerscore
     if not username[0].isalpha() and username[0] != '_': return False
 
     # can contain letters (a-z), numbers (0-9), underscores (_), apostrophes ('), and periods (.)
     if not all(char.isalpha() or char.isdigit() or char in ['_', "'", '.'] for char in username): return False
-    
+    return True
+
 def validate_password(password):
     if not 12 <= len(password) <= 30:
         return False
