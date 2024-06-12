@@ -7,6 +7,7 @@ from database.logging import see_logs
 from logic.admin import update_admin, delete_admin, reset_admin_password
 
 
+
 def main_menu():
     print("Unique Meal Membership Management System")
     print("1. Login")
@@ -31,7 +32,7 @@ def login():
     if role == "super_admin":
         super_admin_menu()
     elif role == "consultant":
-        consultant_menu()
+        consultant_menu(username)
     elif role == "system_admin":
         system_admin_menu()
     else:
@@ -59,7 +60,7 @@ def super_admin_menu():
     choice = input("Enter your choice: ")
     if choice == "1":
         # User overview
-        get_user_overview()
+        update_password("super_admin")
     elif choice == "2":
         # Add consultant
         add_consultant()
@@ -165,7 +166,7 @@ def system_admin_menu():
         system_admin_menu()
 
 
-def consultant_menu():
+def consultant_menu(username):
     print("Consultant Menu")
     print("1. Update password")
     print("2. Add new member")
@@ -175,7 +176,7 @@ def consultant_menu():
     choice = input("Enter your choice: ")
     if choice == "1":
         # Update password
-        update_password()
+        update_password(username)
     elif choice == "2":
         # Add new member
         add_member()

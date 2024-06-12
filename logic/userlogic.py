@@ -1,9 +1,9 @@
 from logic.validate import validate_password
-from database.database import get_connection
-from database.auth import check_password, hash_password
+from database.database import get_connection, send_query
+from database.auth import check_password, hash_password, decrypt_data
 
 def update_password(username):
-    old_password = input("Enter old password")
+    old_password = input("Enter old password: ")
     
     # check in DB if correct 
     conn = get_connection()
@@ -11,16 +11,14 @@ def update_password(username):
         print("Failed to connect to database!")
         return False
     c = conn.cursor()
-    c.execute('SELECT password_hash FROM users WHERE username = ?', username)
-    result = c.fetchone()
-    
-    if(result is None):
+    c.execute('SELECT username, password_hash FROM users ')
+    result = c.fetchall()
+    found_users = [row[0] for row in result if row[1] == hash_password(old_password)]
+
+    print(found_users)
+
+    if(len(found_users) == 0):
         print("Username not found") 
-        return False
-    
-    old_password_hash = result[0]
-    if not check_password(old_password_hash, old_password):
-        print("Incorrect password. Try again!")
         return False
 
     # ask, validate and hash new password
@@ -33,7 +31,7 @@ def update_password(username):
     new_password_hash = hash_password(new_password)
     c.execute('UPDATE users SET password_hash = ? WHERE username = ?', (new_password_hash, username))
     conn.commit()
-
+    conn.close()
     print("Password updated successfully!")
     return True
 
