@@ -1,8 +1,8 @@
 from database import get_connection
 from auth import verify_login
-from userlogic import update_password
+from userlogic import update_password, get_user_overview
 from memberlogic import add_member, update_member_information, search_member
-
+from consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
 
 def main_menu():
     print("Unique Meal Membership Management System")
@@ -65,25 +65,53 @@ def super_admin_menu():
 
 def system_admin_menu():
     print("System Admin Menu")
-    print("1. Add Member")
-    print("2. Edit Member")
-    print("3. Delete Member")
-    print("4. View Member")
-    print("5. Logout")
+    print("1. Update password")
+    print("2. User role overview")
+    print("3. Add consultant")
+    print("4. Edit consultant")
+    print("5. Delete consultant")
+    print("6. Reset consultant password")
+    print("7. Make and restore backup of system")
+    print("8. See logfiles")
+    print("9. Add member")
+    print("10. Edit member")
+    print("11. Delete member")
+    print("12. Search member")
+    print("13. Logout")
     choice = input("Enter your choice: ")
     if choice == "1":
-        # Add member
-        pass
+        # Update password
+        update_password()
     elif choice == "2":
-        # Edit member
-        pass
+        # User role overview
+        get_user_overview()
     elif choice == "3":
-        # Delete member
-        pass
+        # Add consultant
+        add_consultant()
     elif choice == "4":
-        # View member
-        pass
+        # Edit consultant
+        edit_consultant()
     elif choice == "5":
+        # Delete consultant
+        delete_consultant()
+    elif choice == "6":
+        # reset consultant password
+        reset_consultant_password()
+    elif choice == "7":
+        # TODO make and restore backup system
+        pass
+    elif choice == "8":
+        # See logfiles
+        
+    elif choice == "9":
+        edit_consultant()
+    elif choice == "10":
+        edit_consultant()
+    elif choice == "11":
+        edit_consultant()
+    elif choice == "12":
+        edit_consultant()
+    elif choice == "13":
         main_menu()
     else:
         print("Invalid choice. Please try again.")
