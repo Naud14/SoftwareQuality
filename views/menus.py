@@ -105,6 +105,7 @@ def super_admin_menu():
     else:
         print("Invalid choice. Please try again.")
         super_admin_menu()
+    super_admin_menu()
 
 
 def system_admin_menu():
