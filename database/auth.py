@@ -50,7 +50,7 @@ def decrypt_data(encrypted_text):
                 label=None
             )
         )
-        return message_decrypted
+        return message_decrypted.decode('utf-8')
     except ValueError:
         print("Failed to decrypt data")
 
