@@ -67,4 +67,27 @@ def search_member():
     print("TODO")
 
 def delete_member():
-    print("TODO")
+    print("Delete member")
+    membership_id = input("Enter the membership ID of the member to delete: ")
+
+    try:
+        conn = get_connection()
+        if conn is not None:
+            # Check if the provided membership ID exists in the database
+            query = "SELECT * FROM members WHERE membership_id = ?"
+            result = send_query(conn, query, (membership_id,))
+            
+            if result:
+                # If the membership ID exists, proceed with the deletion
+                delete_query = "DELETE FROM members WHERE membership_id = ?"
+                send_query(conn, delete_query, (membership_id,))
+                print("Member deleted successfully!")
+            else:
+                print("No member found with the provided membership ID.")
+            
+            conn.close()
+        else:
+            print("Failed to connect to the database.")
+    except Exception as e:
+        print("Failed to delete member.")
+        print(e)
