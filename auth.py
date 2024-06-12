@@ -1,14 +1,25 @@
 import random
 from datetime import datetime
+from hashlib import sha256
+
 # Define roles
 roles = ["super_admin", "system_admin", "consultant"]
 
+
+def encrypt_user(username, password, role, first_name, last_name):
+    pass
+
+
 # Add a user function
+def hash_password(password):
+    return sha256(password.encode('utf-8')).hexdigest()
+
+
 def add_user(conn, username, password, role, first_name, last_name):
     try:
         c = conn.cursor()
         password_hash = hash_password(password)
-        registration_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        registration_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         c.execute('''
             INSERT INTO users (username, password_hash, role, first_name, last_name, registration_date)
             VALUES (?, ?, ?, ?, ?, ?)
@@ -16,6 +27,11 @@ def add_user(conn, username, password, role, first_name, last_name):
         conn.commit()
     except Exception as e:
         print(e)
+
+
+def check_password(hashed_password, password):
+    return hashed_password == hash_password(password)
+
 
 # Verify user login
 def verify_login(conn, username, password):
@@ -27,21 +43,10 @@ def verify_login(conn, username, password):
             return user[1]  # Return role
         else:
             return None
-    except Error as e:
+    except Exception as e:
         print(e)
     return None
 
-
-# Add hardcoded super admin
-add_user(conn, "super_admin", "Admin_123?", "super_admin", "Super", "Admin")
-
-
-# Example login verification
-role = verify_login(conn, "super_admin", "Admin_123?")
-if role:
-    print(f"Login successful. Role: {role}")
-else:
-    print("Invalid username or password.")
 
 def create_unique_id():
     # get current year and convert to 2 digit string
