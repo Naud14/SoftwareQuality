@@ -35,3 +35,6 @@ def update_member_information():
 
 def search_member():
     print("TODO")
+
+def delete_member():
+    print("TODO")

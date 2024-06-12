@@ -1,8 +1,10 @@
-from database.database import get_connection
-from database.auth import verify_login
-from logic.userlogic import update_password, get_user_overview
-from logic.memberlogic import add_member, update_member_information, search_member
-from logic.consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
+from database import get_connection
+from auth import verify_login
+from userlogic import update_password, get_user_overview
+from memberlogic import add_member, update_member_information, search_member, delete_member
+from consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
+from logging import see_logs
+
 
 def main_menu():
     print("Unique Meal Membership Management System")
@@ -102,13 +104,16 @@ def system_admin_menu():
         pass
     elif choice == "8":
         # See logfiles
-        pass
+        see_logs()
     elif choice == "9":
-        edit_consultant()
+        # Add member
+        add_member()
     elif choice == "10":
-        edit_consultant()
+        # Update member information
+        update_member_information()
     elif choice == "11":
-        edit_consultant()
+        # Delete member
+        delete_member()
     elif choice == "12":
         edit_consultant()
     elif choice == "13":
