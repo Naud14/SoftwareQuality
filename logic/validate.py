@@ -47,5 +47,5 @@ def validate_username(username):
 def validate_password(password):
     if not 12 <= len(password) <= 30:
         return False
-    if not re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%&_\-\+=`|\\(){}[\]:;\'<>,.?/]).{12,30}$', password): False
+    if not re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%&_\-\+=`|\\(){}[\]:;\'<>,.?/]).{12,30}$', password): return False
     return True
