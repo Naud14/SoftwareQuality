@@ -1,5 +1,13 @@
 import sqlite3
 
+
+def send_query(query):
+    conn = get_connection()
+    c = conn.cursor()
+    c.execute(query)
+    conn.commit()
+
+
 def get_connection():
     try:
         conn = sqlite3.connect('identifier.sqlite')
@@ -9,6 +17,7 @@ def get_connection():
             return None
     except sqlite3.Error as error:
         print(error)
+
 
 def create_database():
     try:
@@ -49,7 +58,7 @@ def create_database():
                         time TEXT NOT NULL,
                         username TEXT NOT NULL,
                         description TEXT NOT NULL,
-                        suspicious INTEGER NOT NULL
+                        suspicious TEXT NOT NULL
                     )
                 ''')
         conn.commit()

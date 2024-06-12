@@ -1,6 +1,7 @@
 from database import get_connection
 from auth import verify_login
 
+
 def main_menu():
     print("Unique Meal Membership Management System")
     print("1. Login")
@@ -31,6 +32,7 @@ def login():
     else:
         print("Incorrect login, try again.")
         login()
+
 
 def super_admin_menu():
     print("Super Admin Menu")
