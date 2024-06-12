@@ -1,3 +1,6 @@
+from database import get_connection
+from auth import verify_login
+
 def main_menu():
     print("Unique Meal Membership Management System")
     print("1. Login")
@@ -15,7 +18,9 @@ def main_menu():
 def login():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
-
+    
+    
+    conn = get_connection()
     role = verify_login(conn, username, password)
     
     if role == "super_admin":
