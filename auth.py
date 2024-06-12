@@ -1,5 +1,6 @@
 import random
 from datetime import datetime
+
 # Define roles
 roles = ["super_admin", "system_admin", "consultant"]
 
@@ -31,18 +32,6 @@ def verify_login(conn, username, password):
     except Error as e:
         print(e)
     return None
-
-
-# Add hardcoded super admin
-add_user(conn, "super_admin", "Admin_123?", "super_admin", "Super", "Admin")
-
-
-# Example login verification
-role = verify_login(conn, "super_admin", "Admin_123?")
-if role:
-    print(f"Login successful. Role: {role}")
-else:
-    print("Invalid username or password.")
 
 def create_unique_id():
     # get current year and convert to 2 digit string
