@@ -3,7 +3,9 @@ from auth import verify_login
 from userlogic import update_password, get_user_overview
 from memberlogic import add_member, update_member_information, search_member, delete_member
 from consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
-from logging import see_logs
+from logging import see_logs 
+from admin import update_admin, delete_admin, reset_admin_password
+
 
 
 def main_menu():
@@ -40,25 +42,65 @@ def login():
 
 def super_admin_menu():
     print("Super Admin Menu")
-    print("1. Add System Admin")
-    print("2. Add Consultant")
-    print("3. View Logs")
-    print("4. Backup System")
-    print("5. Logout")
+    print("1. User role overview")
+    print("2. Add consultant")
+    print("3. Edit consultant")
+    print("4. Delete consultant")
+    print("5. Reset consultant password")
+    print("6. Update admin's account")
+    print("7. Delete admin's account")
+    print("8. Reset admin's password")
+    print("9. Make and restore backup of system")
+    print("10. See logfiles")
+    print("11. Add member")
+    print("12. Edit member")
+    print("13. Delete member")
+    print("14. Search member")
+    print("15. Logout")
     choice = input("Enter your choice: ")
     if choice == "1":
-        # Add system admin
-        pass
+        # User overview
+        get_user_overview()
     elif choice == "2":
         # Add consultant
-        pass
+        add_consultant()
     elif choice == "3":
-        # View logs
-        pass
+        # Edit consultant
+        edit_consultant()
     elif choice == "4":
-        # Backup system
-        pass
+        # Delete consultant
+        delete_consultant()
     elif choice == "5":
+        # Reset consultant password
+        reset_consultant_password()
+    elif choice == "6":
+        # Update admin's account
+        update_admin()
+    elif choice == "7":
+        # Delete admin's account
+        delete_admin()
+    elif choice == "8":
+        # reset admin's password
+        reset_admin_password()
+    elif choice == "9":
+        # TODO make and restore backup system
+        pass
+    elif choice == "10":
+        # See logfiles
+        see_logs()
+    elif choice == "11":
+        # Add member
+        add_member()
+    elif choice == "12":
+        # Edit member
+        update_member_information()
+    elif choice == "13":
+        # Delete member
+        delete_member()
+    elif choice == "13":
+        # Search member
+        search_member()
+    elif choice == "15":
         main_menu()
     else:
         print("Invalid choice. Please try again.")
@@ -115,7 +157,8 @@ def system_admin_menu():
         # Delete member
         delete_member()
     elif choice == "12":
-        edit_consultant()
+        # Search member
+        search_member()
     elif choice == "13":
         main_menu()
     else:
