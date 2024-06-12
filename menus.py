@@ -16,6 +16,17 @@ def login():
     username = input("Enter your username: ")
     password = input("Enter your password: ")
 
+    role = verify_login(conn, username, password)
+    
+    if role == "super_admin":
+        super_admin_menu()
+    elif role == "consultant":
+        consultant_menu()
+    elif role == "system_admin":
+        system_admin_menu()
+    else:
+        print("Incorrect login, try again.")
+        login()
 
 def super_admin_menu():
     print("Super Admin Menu")

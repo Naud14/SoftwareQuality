@@ -16,7 +16,6 @@ def add_user(conn, username, password, role, first_name, last_name):
     except Exception as e:
         print(e)
 
-
 # Verify user login
 def verify_login(conn, username, password):
     try:
@@ -31,14 +30,3 @@ def verify_login(conn, username, password):
         print(e)
     return None
 
-
-# Add hardcoded super admin
-add_user(conn, "super_admin", "Admin_123?", "super_admin", "Super", "Admin")
-
-
-# Example login verification
-role = verify_login(conn, "super_admin", "Admin_123?")
-if role:
-    print(f"Login successful. Role: {role}")
-else:
-    print("Invalid username or password.")
