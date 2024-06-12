@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96e62e39-5f9a-4ef0-86a6-f63859904e9e" name="Changes" comment="Adding files">
+    <list default="true" id="96e62e39-5f9a-4ef0-86a6-f63859904e9e" name="Changes" comment="Adding files, encryption &amp; decryption">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backup.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/backup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consultantlogic.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/consultantlogic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identifier.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/database/identifier.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/logging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/memberlogic.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/memberlogic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/menus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userlogic.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/userlogic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validate.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/validate.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +88,13 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\danie\PycharmProjects\SoftwareQuality\logic" />
+      <recent name="C:\Users\danie\PycharmProjects\SoftwareQuality\database" />
+      <recent name="C:\Users\danie\PycharmProjects\SoftwareQuality\views" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Software Quality" />
@@ -127,7 +144,7 @@
       <workItem from="1718034939508" duration="41000" />
       <workItem from="1718034988000" duration="4142000" />
       <workItem from="1718057110048" duration="1832000" />
-      <workItem from="1718179752944" duration="5391000" />
+      <workItem from="1718179752944" duration="6319000" />
     </task>
     <task id="LOCAL-00001" summary="Adding files">
       <option name="closed" value="true" />
@@ -137,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718182919313</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding files, encryption &amp; decryption">
+      <option name="closed" value="true" />
+      <created>1718185370244</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718185370244</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +171,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Adding files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding files" />
+    <MESSAGE value="Adding files, encryption &amp; decryption" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding files, encryption &amp; decryption" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
