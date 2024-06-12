@@ -1,5 +1,7 @@
 from database import get_connection
 from auth import verify_login
+from userlogic import update_password
+from memberlogic import add_member, update_member_information, search_member
 
 
 def main_menu():
@@ -90,13 +92,26 @@ def system_admin_menu():
 
 def consultant_menu():
     print("Consultant Menu")
-    print("1. View Member")
-    print("2. Logout")
+    print("1. Update password")
+    print("2. Add new member")
+    print("3. Modify/update member information")
+    print("4. Search member")
+    print("5. Logout")
     choice = input("Enter your choice: ")
     if choice == "1":
-        # View member
-        pass
+        # Update password
+        update_password()
     elif choice == "2":
+        # Add new member
+        add_member()
+    elif choice == "3":
+        # Modify/update member information
+        update_member_information()
+    elif choice == "4":
+        # Search member
+        search_member()
+    elif choice == "5":
+        # Logout
         main_menu()
     else:
         print("Invalid choice. Please try again.")

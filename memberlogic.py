@@ -27,3 +27,11 @@ def add_member():
         phone = input("Enter your phone number without +31 6: ")
         if(validate_phone(phone)) : break
         else:  print("Invalid phone number, please try again!")
+
+    # TODO add member to the database
+
+def update_member_information():
+    print("TODO")
+
+def search_member():
+    print("TODO")
