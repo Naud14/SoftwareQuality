@@ -1,6 +1,8 @@
 from datetime import datetime
 from database import send_query
 
+def see_logs():
+    print("TODO")
 
 def log_activity(username, description, additional_info=None, suspicious=0):
     date = datetime.now().strftime("%Y-%m-%d")
@@ -10,4 +12,3 @@ def log_activity(username, description, additional_info=None, suspicious=0):
     INSERT INTO logs (date, time, username, description, additional_info, suspicious)
     VALUES ({date}, {time}, {username}, {description}, {additional_info}, {suspicious})
     ''')
-
