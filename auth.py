@@ -18,7 +18,6 @@ def add_user(conn, username, password, role, first_name, last_name):
     except Exception as e:
         print(e)
 
-
 # Verify user login
 def verify_login(conn, username, password):
     try:
@@ -44,18 +43,3 @@ if role:
     print(f"Login successful. Role: {role}")
 else:
     print("Invalid username or password.")
-
-def create_unique_id():
-    # get current year and convert to 2 digit string
-    current_year = str(datetime.now().year)[-2:]
-
-    # generate seven random digits
-    random_digits = [random.randint(0, 9) for _ in range(7)]
-
-    # combine year and seven random digits
-    first_nine = [int(digit) for digit in current_year] + random_digits
-
-    # calculate checksum 
-    checksum = sum(first_nine) % 10
-
-    return ''.join(map(str, first_nine)) + str(checksum)

@@ -1,5 +1,14 @@
 import sqlite3
 
+def get_connection():
+    try:
+        conn = sqlite3.connect('identifier.sqlite')
+        if conn is not None:
+            return conn
+        else:
+            return None
+    except sqlite3.Error as error:
+        print(error)
 
 def create_database():
     try:
