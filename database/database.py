@@ -9,6 +9,7 @@ def send_query(conn, query, params=None):
         else:
             cursor.execute(query)
         conn.commit()
+        return cursor.fetchall()
     except sqlite3.Error as error:
         print(error)
         return None
