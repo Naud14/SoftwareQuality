@@ -1,4 +1,5 @@
 from database.database import prepare_database
+from database.database import send_query, get_connection
 from database.auth import add_user
 from views.menus import main_menu
 

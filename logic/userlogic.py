@@ -1,4 +1,4 @@
-from validate import validate_password
+from logic.validate import validate_password
 from database.database import get_connection
 from database.auth import check_password, hash_password
 
