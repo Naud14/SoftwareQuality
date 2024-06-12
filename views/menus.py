@@ -7,7 +7,6 @@ from database.logging import see_logs
 from logic.admin import update_admin, delete_admin, reset_admin_password
 
 
-
 def main_menu():
     print("Unique Meal Membership Management System")
     print("1. Login")
