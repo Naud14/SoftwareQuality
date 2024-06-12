@@ -32,6 +32,7 @@ def hash_password(password):
     return sha256(password.encode('utf-8')).hexdigest()
 
 
+# Send encrypted user in database
 def add_user(username, password, role, first_name, last_name):
     try:
         password_hash = hash_password(password)
@@ -54,12 +55,13 @@ def check_password(hashed_password, password):
 def verify_login(conn, username, password):
     try:
         c = conn.cursor()
-        c.execute('SELECT password_hash, role FROM users WHERE username=?', (username,))
-        user = c.fetchone()
-        if user and check_password(user[0], password):
-            return user[1]  # Return role
-        else:
-            return None
+        c.execute('SELECT username, password_hash, role FROM users')
+        for row in c.fetchall():
+            if decrypt_data(decrypt_data(row[0])) == username:
+                if row[1] == hash_password(password):
+                    return decrypt_data(row[2])
+                    # Could also return all data from row by using return row.
+                    # You'd probably need to decrypt it all first though.
     except Exception as e:
         print(e)
     return None

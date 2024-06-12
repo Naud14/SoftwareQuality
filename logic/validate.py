@@ -31,6 +31,7 @@ def validate_email(email):
 def validate_phone(phone):
     return re.match(r'^\d{8}$', phone) is not None
 
+
 def validate_username(username):
     # check if username is unique and no distinquish between lowercase or uppercase letters
 

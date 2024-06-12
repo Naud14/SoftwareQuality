@@ -1,5 +1,5 @@
 from datetime import datetime
-from database import send_query
+from database.database import send_query
 
 
 def log_activity(username, description, additional_info=None, suspicious=0):

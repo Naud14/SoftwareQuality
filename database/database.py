@@ -9,7 +9,7 @@ def send_query(query):
     c = conn.cursor()
     c.execute(query)
     conn.commit()
-    return True
+    return c
 
 
 def get_connection():
