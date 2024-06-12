@@ -15,10 +15,8 @@ def update_password(username):
     result = c.fetchall()
     found_users = [row[0] for row in result if row[1] == hash_password(old_password)]
 
-    print(found_users)
-
     if(len(found_users) == 0):
-        print("Username not found") 
+        print("Not valid, please try again") 
         return False
 
     # ask, validate and hash new password
@@ -36,4 +34,36 @@ def update_password(username):
     return True
 
 def get_user_overview():
-    print("TODO")
+    try:
+        conn = get_connection()
+        if conn is None:
+            print("Failed to connect to database!")
+            return False
+        
+        query = 'SELECT username, role, first_name, last_name, registration_date FROM users'
+        users = send_query(conn, query)
+
+        if not users:
+            print("No users found!")
+            return False
+        
+        # print user overview
+        print("User Overview:")
+        for user in users:
+            username = decrypt_data(user[0])
+            role = decrypt_data(user[1])
+            first_name = decrypt_data(user[2])
+            last_name = decrypt_data(user[3])
+            registration_date = decrypt_data(user[4])
+
+            print(f"Username: {username}")
+            print(f"Role: {role}")
+            print(f"Name: {first_name} {last_name}")
+            print(f"Registration Date: {registration_date}")
+            print("-"*50)
+        conn.close()
+        return True
+    except Exception as e:
+        print("Failed to fetch user overview")
+        print(e)
+        return False

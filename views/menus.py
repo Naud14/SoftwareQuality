@@ -34,7 +34,7 @@ def login():
     elif role == "consultant":
         consultant_menu(username)
     elif role == "system_admin":
-        system_admin_menu()
+        system_admin_menu(username)
     else:
         print("Incorrect login, try again.")
         login()
@@ -60,7 +60,7 @@ def super_admin_menu():
     choice = input("Enter your choice: ")
     if choice == "1":
         # User overview
-        update_password("super_admin")
+        get_user_overview()
     elif choice == "2":
         # Add consultant
         add_consultant()
@@ -108,7 +108,7 @@ def super_admin_menu():
     super_admin_menu()
 
 
-def system_admin_menu():
+def system_admin_menu(username):
     print("System Admin Menu")
     print("1. Update password")
     print("2. User role overview")
@@ -126,7 +126,7 @@ def system_admin_menu():
     choice = input("Enter your choice: ")
     if choice == "1":
         # Update password
-        update_password()
+        update_password(username)
     elif choice == "2":
         # User role overview
         get_user_overview()
