@@ -73,6 +73,7 @@ def seed_database():
     # add_user("super_admin", "Admin123?", "super_admin", "Jonna", "Jimmy")
     pass
 
+
 def prepare_database():
     create_database()
     seed_database()
