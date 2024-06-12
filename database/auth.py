@@ -3,7 +3,7 @@ from datetime import datetime
 from hashlib import sha256
 from cryptography.fernet import Fernet
 
-from database import send_query
+from database.database import send_query
 
 # Define roles
 roles = ["super_admin", "system_admin", "consultant"]

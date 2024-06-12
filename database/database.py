@@ -1,5 +1,4 @@
 import sqlite3
-from auth import add_user
 
 
 def send_query(query):
@@ -71,8 +70,8 @@ def create_database():
 
 
 def seed_database():
-    add_user("super_admin", "Admin123?", "super_admin", "Jonna", "Jimmy")
-
+    # add_user("super_admin", "Admin123?", "super_admin", "Jonna", "Jimmy")
+    pass
 
 def prepare_database():
     create_database()

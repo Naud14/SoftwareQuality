@@ -1,4 +1,5 @@
-from validate.py import validate_weight, validate_phone, validate_address, validate_email, validate_gender, validate_age
+from logic.validate import validate_weight, validate_phone, validate_address, validate_email, validate_gender, validate_age
+
 
 def add_member():
     while(True):
