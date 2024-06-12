@@ -46,7 +46,20 @@ def edit_consultant():
     print("TODO")
 
 def delete_consultant():
-    print("TODO")
+    print("Delete consultant")
+    username = input("Enter username of consultant to delete: ")
+    try: 
+        conn = get_connection()
+        if(conn is not None):
+            query = "DELETE FROM users WHERE username = ?"
+            send_query(conn, query, (username,))
+            print("Consultant deleted successfully")
+            conn.close()
+        else:
+            print("Failed to connect to database")
+    except Exception as e:
+        print("Failed to delete consultant")
+        print(e)
 
 def reset_consultant_password():
     print("TODO") 
