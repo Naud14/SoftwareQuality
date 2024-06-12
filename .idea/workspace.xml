@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96e62e39-5f9a-4ef0-86a6-f63859904e9e" name="Changes" comment="see_logs() now prints decrypted logs, log_activity adds an encrypted log" />
+    <list default="true" id="96e62e39-5f9a-4ef0-86a6-f63859904e9e" name="Changes" comment="DB changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/identifier.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/identifier.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logic/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/logic/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/menus.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,7 +138,7 @@
       <workItem from="1718034939508" duration="41000" />
       <workItem from="1718034988000" duration="4142000" />
       <workItem from="1718057110048" duration="1832000" />
-      <workItem from="1718179752944" duration="7103000" />
+      <workItem from="1718179752944" duration="11254000" />
     </task>
     <task id="LOCAL-00001" summary="Adding files">
       <option name="closed" value="true" />
@@ -172,7 +180,31 @@
       <option name="project" value="LOCAL" />
       <updated>1718186579336</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed routes">
+      <option name="closed" value="true" />
+      <created>1718187135306</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718187135306</updated>
+    </task>
+    <task id="LOCAL-00007" summary="DB changes">
+      <option name="closed" value="true" />
+      <created>1718187340333</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718187340333</updated>
+    </task>
+    <task id="LOCAL-00008" summary="DB changes">
+      <option name="closed" value="true" />
+      <created>1718190495639</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1718190495639</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,20 +228,23 @@
     <MESSAGE value="Decryption of rows in db, changed structure" />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;views/menus.py" />
     <MESSAGE value="see_logs() now prints decrypted logs, log_activity adds an encrypted log" />
-    <option name="LAST_COMMIT_MESSAGE" value="see_logs() now prints decrypted logs, log_activity adds an encrypted log" />
+    <MESSAGE value="Fixed routes" />
+    <MESSAGE value="DB changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>2</line>
+          <line>3</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SoftwareQuality$main.coverage" NAME="main Coverage Results" MODIFIED="1718192518415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Software_Quality$main.coverage" NAME="main Coverage Results" MODIFIED="1718037049816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
