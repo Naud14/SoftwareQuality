@@ -1,11 +1,15 @@
 import sqlite3
+from auth import add_user
 
 
 def send_query(query):
     conn = get_connection()
+    if conn is None:
+        return False
     c = conn.cursor()
     c.execute(query)
     conn.commit()
+    return True
 
 
 def get_connection():
@@ -25,7 +29,7 @@ def create_database():
         c = conn.cursor()
         c.execute('''
                     CREATE TABLE IF NOT EXISTS users (
-                        id INTEGER PRIMARY KEY,
+                        id SERIAL PRIMARY KEY,
                         username TEXT NOT NULL UNIQUE,
                         password_hash TEXT NOT NULL,
                         role TEXT NOT NULL,
@@ -37,13 +41,13 @@ def create_database():
         # Create members table
         c.execute('''
                     CREATE TABLE IF NOT EXISTS members (
-                        id INTEGER PRIMARY KEY,
+                        id SERIAL PRIMARY KEY,
                         membership_id TEXT NOT NULL UNIQUE,
                         first_name TEXT NOT NULL,
                         last_name TEXT NOT NULL,
                         age INTEGER NOT NULL,
                         gender TEXT NOT NULL,
-                        weight REAL NOT NULL,
+                        weight TEXT NOT NULL,
                         address TEXT NOT NULL,
                         email TEXT NOT NULL,
                         phone TEXT NOT NULL,
@@ -53,7 +57,7 @@ def create_database():
         # Create logs table
         c.execute('''
                     CREATE TABLE IF NOT EXISTS logs (
-                        id INTEGER PRIMARY KEY,
+                        id SERIAL PRIMARY KEY,
                         date TEXT NOT NULL,
                         time TEXT NOT NULL,
                         username TEXT NOT NULL,
@@ -67,7 +71,7 @@ def create_database():
 
 
 def seed_database():
-    pass
+    add_user("super_admin", "Admin123?", "super_admin", "Jonna", "Jimmy")
 
 
 def prepare_database():

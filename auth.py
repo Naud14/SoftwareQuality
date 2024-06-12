@@ -1,13 +1,30 @@
 import random
 from datetime import datetime
 from hashlib import sha256
+from cryptography.fernet import Fernet
+
+from database import send_query
 
 # Define roles
 roles = ["super_admin", "system_admin", "consultant"]
 
 
-def encrypt_user(username, password, role, first_name, last_name):
-    pass
+# Generate key for program
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
+
+def encrypt_data(data):
+    # Encrypt the data
+    encrypted_text = cipher_suite.encrypt(data.encode('utf-8'))
+    return encrypted_text
+
+
+def decrypt_data(encrypted_text):
+    # Decrypt the user information
+    decrypted_text = cipher_suite.decrypt(encrypted_text).decode('utf-8')
+    # Split the decrypted text back into its components
+    return decrypted_text
 
 
 # Add a user function
@@ -15,16 +32,16 @@ def hash_password(password):
     return sha256(password.encode('utf-8')).hexdigest()
 
 
-def add_user(conn, username, password, role, first_name, last_name):
+def add_user(username, password, role, first_name, last_name):
     try:
-        c = conn.cursor()
         password_hash = hash_password(password)
         registration_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        c.execute('''
+        send_query(f'''
             INSERT INTO users (username, password_hash, role, first_name, last_name, registration_date)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (username, password_hash, role, first_name, last_name, registration_date))
-        conn.commit()
+            VALUES ({encrypt_data(username)}, {password_hash}, {encrypt_data(role)}, {encrypt_data(first_name)}, 
+            {encrypt_data(last_name)}, {encrypt_data(registration_date)})
+        ''')
+
     except Exception as e:
         print(e)
 

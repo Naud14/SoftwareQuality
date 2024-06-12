@@ -1,0 +1,270 @@
+Index: menus.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from database import get_connection\r\nfrom auth import verify_login\r\n\r\ndef main_menu():\r\n    print(\"Unique Meal Membership Management System\")\r\n    print(\"1. Login\")\r\n    print(\"2. Exit\")\r\n    choice = input(\"Enter your choice: \")\r\n    if choice == \"1\":\r\n        login()\r\n    elif choice == \"2\":\r\n        exit()\r\n    else:\r\n        print(\"Invalid choice. Please try again.\")\r\n        main_menu()\r\n\r\n\r\ndef login():\r\n    username = input(\"Enter your username: \")\r\n    password = input(\"Enter your password: \")\r\n    \r\n    conn = get_connection()\r\n    role = verify_login(conn, username, password)\r\n    \r\n    if role == \"super_admin\":\r\n        super_admin_menu()\r\n    elif role == \"consultant\":\r\n        consultant_menu()\r\n    elif role == \"system_admin\":\r\n        system_admin_menu()\r\n    else:\r\n        print(\"Incorrect login, try again.\")\r\n        login()\r\n\r\ndef super_admin_menu():\r\n    print(\"Super Admin Menu\")\r\n    print(\"1. Add System Admin\")\r\n    print(\"2. Add Consultant\")\r\n    print(\"3. View Logs\")\r\n    print(\"4. Backup System\")\r\n    print(\"5. Logout\")\r\n    choice = input(\"Enter your choice: \")\r\n    if choice == \"1\":\r\n        # Add system admin\r\n        pass\r\n    elif choice == \"2\":\r\n        # Add consultant\r\n        pass\r\n    elif choice == \"3\":\r\n        # View logs\r\n        pass\r\n    elif choice == \"4\":\r\n        # Backup system\r\n        pass\r\n    elif choice == \"5\":\r\n        main_menu()\r\n    else:\r\n        print(\"Invalid choice. Please try again.\")\r\n        super_admin_menu()\r\n\r\n\r\ndef system_admin_menu():\r\n    print(\"System Admin Menu\")\r\n    print(\"1. Add Member\")\r\n    print(\"2. Edit Member\")\r\n    print(\"3. Delete Member\")\r\n    print(\"4. View Member\")\r\n    print(\"5. Logout\")\r\n    choice = input(\"Enter your choice: \")\r\n    if choice == \"1\":\r\n        # Add member\r\n        pass\r\n    elif choice == \"2\":\r\n        # Edit member\r\n        pass\r\n    elif choice == \"3\":\r\n        # Delete member\r\n        pass\r\n    elif choice == \"4\":\r\n        # View member\r\n        pass\r\n    elif choice == \"5\":\r\n        main_menu()\r\n    else:\r\n        print(\"Invalid choice. Please try again.\")\r\n        system_admin_menu()\r\n\r\n\r\ndef consultant_menu():\r\n    print(\"Consultant Menu\")\r\n    print(\"1. View Member\")\r\n    print(\"2. Logout\")\r\n    choice = input(\"Enter your choice: \")\r\n    if choice == \"1\":\r\n        # View member\r\n        pass\r\n    elif choice == \"2\":\r\n        main_menu()\r\n    else:\r\n        print(\"Invalid choice. Please try again.\")\r\n        consultant_menu()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/menus.py b/menus.py
+--- a/menus.py	(revision b21a93ecc471a9076fde52017af5b7bcc31d1119)
++++ b/menus.py	(date 1718180134329)
+@@ -1,6 +1,7 @@
+ from database import get_connection
+ from auth import verify_login
+ 
++
+ def main_menu():
+     print("Unique Meal Membership Management System")
+     print("1. Login")
+@@ -32,6 +33,7 @@
+         print("Incorrect login, try again.")
+         login()
+ 
++
+ def super_admin_menu():
+     print("Super Admin Menu")
+     print("1. Add System Admin")
+Index: database.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import sqlite3\r\n\r\ndef get_connection():\r\n    try:\r\n        conn = sqlite3.connect('identifier.sqlite')\r\n        if conn is not None:\r\n            return conn\r\n        else:\r\n            return None\r\n    except sqlite3.Error as error:\r\n        print(error)\r\n\r\ndef create_database():\r\n    try:\r\n        conn = sqlite3.connect('identifier.sqlite')\r\n        c = conn.cursor()\r\n        c.execute('''\r\n                    CREATE TABLE IF NOT EXISTS users (\r\n                        id INTEGER PRIMARY KEY,\r\n                        username TEXT NOT NULL UNIQUE,\r\n                        password_hash TEXT NOT NULL,\r\n                        role TEXT NOT NULL,\r\n                        first_name TEXT NOT NULL,\r\n                        last_name TEXT NOT NULL,\r\n                        registration_date TEXT NOT NULL\r\n                    )\r\n                ''')\r\n        # Create members table\r\n        c.execute('''\r\n                    CREATE TABLE IF NOT EXISTS members (\r\n                        id INTEGER PRIMARY KEY,\r\n                        membership_id TEXT NOT NULL UNIQUE,\r\n                        first_name TEXT NOT NULL,\r\n                        last_name TEXT NOT NULL,\r\n                        age INTEGER NOT NULL,\r\n                        gender TEXT NOT NULL,\r\n                        weight REAL NOT NULL,\r\n                        address TEXT NOT NULL,\r\n                        email TEXT NOT NULL,\r\n                        phone TEXT NOT NULL,\r\n                        registration_date TEXT NOT NULL\r\n                    )\r\n                ''')\r\n        # Create logs table\r\n        c.execute('''\r\n                    CREATE TABLE IF NOT EXISTS logs (\r\n                        id INTEGER PRIMARY KEY,\r\n                        date TEXT NOT NULL,\r\n                        time TEXT NOT NULL,\r\n                        username TEXT NOT NULL,\r\n                        description TEXT NOT NULL,\r\n                        suspicious INTEGER NOT NULL\r\n                    )\r\n                ''')\r\n        conn.commit()\r\n    except sqlite3.Error as error:\r\n        print(error)\r\n\r\n\r\ndef seed_database():\r\n    pass\r\n\r\n\r\ndef prepare_database():\r\n    create_database()\r\n    seed_database()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database.py b/database.py
+--- a/database.py	(revision b21a93ecc471a9076fde52017af5b7bcc31d1119)
++++ b/database.py	(date 1718180030507)
+@@ -1,5 +1,6 @@
+ import sqlite3
+ 
++
+ def get_connection():
+     try:
+         conn = sqlite3.connect('identifier.sqlite')
+@@ -10,6 +11,7 @@
+     except sqlite3.Error as error:
+         print(error)
+ 
++
+ def create_database():
+     try:
+         conn = sqlite3.connect('identifier.sqlite')
+Index: auth.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import random\r\nfrom datetime import datetime\r\nimport re\r\n# Define roles\r\nroles = [\"super_admin\", \"system_admin\", \"consultant\"]\r\ncities = [\"Rotterdam\", \"Oldenzaal\", \"Budapest\", \"Kathmandu\", \"Moskou\", \"Lelystad\", \"Stockholm\", \"Ruinerwold\", \"Liverpool\", \"Penemunde\"]\r\n\r\n\r\n# Add a user function\r\ndef add_user(conn, username, password, role, first_name, last_name):\r\n    try:\r\n        c = conn.cursor()\r\n        password_hash = hash_password(password)\r\n        registration_date = datetime.datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\r\n        c.execute('''\r\n            INSERT INTO users (username, password_hash, role, first_name, last_name, registration_date)\r\n            VALUES (?, ?, ?, ?, ?, ?)\r\n        ''', (username, password_hash, role, first_name, last_name, registration_date))\r\n        conn.commit()\r\n    except Exception as e:\r\n        print(e)\r\n\r\n# Verify user login\r\ndef verify_login(conn, username, password):\r\n    try:\r\n        c = conn.cursor()\r\n        c.execute('SELECT password_hash, role FROM users WHERE username=?', (username,))\r\n        user = c.fetchone()\r\n        if user and check_password(user[0], password):\r\n            return user[1]  # Return role\r\n        else:\r\n            return None\r\n    except Error as e:\r\n        print(e)\r\n    return None\r\n\r\n\r\n# Add hardcoded super admin\r\nadd_user(conn, \"super_admin\", \"Admin_123?\", \"super_admin\", \"Super\", \"Admin\")\r\n\r\n\r\n# Example login verification\r\nrole = verify_login(conn, \"super_admin\", \"Admin_123?\")\r\nif role:\r\n    print(f\"Login successful. Role: {role}\")\r\nelse:\r\n    print(\"Invalid username or password.\")\r\n\r\ndef create_unique_id():\r\n    # get current year and convert to 2 digit string\r\n    current_year = str(datetime.now().year)[-2:]\r\n\r\n    # generate seven random digits\r\n    random_digits = [random.randint(0, 9) for _ in range(7)]\r\n\r\n    # combine year and seven random digits\r\n    first_nine = [int(digit) for digit in current_year] + random_digits\r\n\r\n    # calculate checksum \r\n    checksum = sum(first_nine) % 10\r\n\r\n    return ''.join(map(str, first_nine)) + str(checksum)\r\n\r\ndef check_first_name(name):\r\n    return name.isalpha()\r\n\r\ndef validate_(age):\r\n    return age.isdigit() and 0 < int(age) <= 125\r\n\r\ndef validate_gender(gender):\r\n    return gender.lower() in ['male', 'female']\r\n\r\ndef validate_weight(weight):\r\n    return weight.replace('.', '', 1).isdigit() and 0 < int(weight) <= 700\r\n\r\ndef validate_address(street, house_number, zip_code, city):\r\n    validate_zipcode = re.match(r'^\\d{4}[A-Z]{2}$', zip_code)\r\n    validate_city = city.capitalize() in cities\r\n    return validate_zipcode and validate_city\r\n\r\ndef validate_email(email):\r\n    return re.match(r'^\\S+@\\S+\\.\\S+$', email) is not None\r\n\r\ndef validate_phone(phone):\r\n    return re.match(r'^\\d{8}$', phone) is not None\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/auth.py b/auth.py
+--- a/auth.py	(revision b21a93ecc471a9076fde52017af5b7bcc31d1119)
++++ b/auth.py	(date 1718179971740)
+@@ -20,6 +20,7 @@
+     except Exception as e:
+         print(e)
+ 
++
+ # Verify user login
+ def verify_login(conn, username, password):
+     try:
+@@ -35,17 +36,6 @@
+     return None
+ 
+ 
+-# Add hardcoded super admin
+-add_user(conn, "super_admin", "Admin_123?", "super_admin", "Super", "Admin")
+-
+-
+-# Example login verification
+-role = verify_login(conn, "super_admin", "Admin_123?")
+-if role:
+-    print(f"Login successful. Role: {role}")
+-else:
+-    print("Invalid username or password.")
+-
+ def create_unique_id():
+     # get current year and convert to 2 digit string
+     current_year = str(datetime.now().year)[-2:]
+@@ -61,25 +51,32 @@
+ 
+     return ''.join(map(str, first_nine)) + str(checksum)
+ 
++
+ def check_first_name(name):
+     return name.isalpha()
+ 
++
+ def validate_(age):
+     return age.isdigit() and 0 < int(age) <= 125
+ 
++
+ def validate_gender(gender):
+     return gender.lower() in ['male', 'female']
+ 
++
+ def validate_weight(weight):
+     return weight.replace('.', '', 1).isdigit() and 0 < int(weight) <= 700
+ 
++
+ def validate_address(street, house_number, zip_code, city):
+     validate_zipcode = re.match(r'^\d{4}[A-Z]{2}$', zip_code)
+     validate_city = city.capitalize() in cities
+     return validate_zipcode and validate_city
+ 
++
+ def validate_email(email):
+     return re.match(r'^\S+@\S+\.\S+$', email) is not None
+ 
++
+ def validate_phone(phone):
+     return re.match(r'^\d{8}$', phone) is not None
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"96e62e39-5f9a-4ef0-86a6-f63859904e9e\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/Software Quality.iml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/dataSources.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/sqldialects.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/auth.py\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/database.db\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/database.py\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/identifier.sqlite\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/main.py\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/menus.py\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"DatabaseLocalColorSettings\">\r\n    <colors>\r\n      <entry key=\"8ee5f4a8-03dc-45ae-af91-d097989d985c\" value=\"Orange\" />\r\n    </colors>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_AUTO_UPDATE\" value=\"true\" />\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2hh8QVsUdaxaxu23ykNJZQ7dW4S\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;Python.main.executor&quot;: &quot;Run&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;DatabaseDriversLRU&quot;: [\r\n      &quot;sqlite&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"main\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"Software Quality\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.17890.14\" />\r\n        <option value=\"bundled-python-sdk-5b207ade9991-7e9c3bbb6e34-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.17890.14\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"96e62e39-5f9a-4ef0-86a6-f63859904e9e\" name=\"Changes\" comment=\"\" />\r\n      <created>1718034933613</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1718034933613</updated>\r\n      <workItem from=\"1718034939508\" duration=\"41000\" />\r\n      <workItem from=\"1718034988000\" duration=\"4142000\" />\r\n      <workItem from=\"1718057110048\" duration=\"1832000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\r\n          <url>file://$PROJECT_DIR$/main.py</url>\r\n          <line>2</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"com.intellij.coverage.CoverageDataManagerImpl\">\r\n    <SUITE FILE_PATH=\"coverage/Software_Quality$main.coverage\" NAME=\"main Coverage Results\" MODIFIED=\"1718037049816\" SOURCE_PROVIDER=\"com.intellij.coverage.DefaultCoverageFileProvider\" RUNNER=\"coverage.py\" COVERAGE_BY_TEST_ENABLED=\"false\" COVERAGE_TRACING_ENABLED=\"false\" WORKING_DIRECTORY=\"$PROJECT_DIR$\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b21a93ecc471a9076fde52017af5b7bcc31d1119)
++++ b/.idea/workspace.xml	(date 1718180392172)
+@@ -5,20 +5,12 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="96e62e39-5f9a-4ef0-86a6-f63859904e9e" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/Software Quality.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/identifier.sqlite" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/menus.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/Software Quality.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Software Quality.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/auth.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/menus.py" beforeDir="false" afterPath="$PROJECT_DIR$/menus.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -41,6 +33,18 @@
+     <option name="PUSH_AUTO_UPDATE" value="true" />
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "MellowZippy1"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/Naud14/SoftwareQuality.git",
++    "accountId": "6ef97ae6-6407-441d-a0e5-7ea41230af30"
++  }
++}]]></component>
+   <component name="ProblemsViewState">
+     <option name="selectedTabId" value="CurrentFile" />
+   </component>
+@@ -55,28 +59,28 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "ASKED_ADD_EXTERNAL_FILES": "true",
++    "Python.main.executor": "Run",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "main",
++    "ignore.virus.scanning.warn.message": "true",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "npm",
++    "settings.editor.selected.configurable": "vcs.Git",
++    "vue.rearranger.settings.migration": "true"
+   },
+-  &quot;keyToStringList&quot;: {
+-    &quot;DatabaseDriversLRU&quot;: [
+-      &quot;sqlite&quot;
++  "keyToStringList": {
++    "DatabaseDriversLRU": [
++      "sqlite"
+     ]
+   }
+-}</component>
++}]]></component>
+   <component name="RunManager">
+     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="Software Quality" />
+@@ -126,6 +130,7 @@
+       <workItem from="1718034939508" duration="41000" />
+       <workItem from="1718034988000" duration="4142000" />
+       <workItem from="1718057110048" duration="1832000" />
++      <workItem from="1718179752944" duration="634000" />
+     </task>
+     <servers />
+   </component>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Black\">\r\n    <option name=\"sdkName\" value=\"Python 3.12 (Software Quality)\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" project-jdk-name=\"Python 3.12 (Software Quality)\" project-jdk-type=\"Python SDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision b21a93ecc471a9076fde52017af5b7bcc31d1119)
++++ b/.idea/misc.xml	(date 1718179972051)
+@@ -3,5 +3,5 @@
+   <component name="Black">
+     <option name="sdkName" value="Python 3.12 (Software Quality)" />
+   </component>
+-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (Software Quality)" project-jdk-type="Python SDK" />
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12" project-jdk-type="Python SDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/Software Quality.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"PYTHON_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\">\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <excludeFolder url=\"file://$MODULE_DIR$/.venv\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/Software Quality.iml b/.idea/Software Quality.iml
+--- a/.idea/Software Quality.iml	(revision b21a93ecc471a9076fde52017af5b7bcc31d1119)
++++ b/.idea/Software Quality.iml	(date 1718179972034)
+@@ -4,7 +4,7 @@
+     <content url="file://$MODULE_DIR$">
+       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+     </content>
+-    <orderEntry type="inheritedJdk" />
++    <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
+     <orderEntry type="sourceFolder" forTests="false" />
+   </component>
+ </module>
+\ No newline at end of file
