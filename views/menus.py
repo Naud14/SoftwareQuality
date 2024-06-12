@@ -1,10 +1,10 @@
 from database import get_connection
-from auth import verify_login
-from userlogic import update_password, get_user_overview
-from memberlogic import add_member, update_member_information, search_member, delete_member
-from consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
+from database.auth import verify_login
+from logic.userlogic import update_password, get_user_overview
+from logic.memberlogic import add_member, update_member_information, search_member, delete_member
+from logic.consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
 from logging import see_logs 
-from admin import update_admin, delete_admin, reset_admin_password
+from logic.admin import update_admin, delete_admin, reset_admin_password
 
 
 
