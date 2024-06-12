@@ -19,7 +19,7 @@ def generate_key_pair():
         key_size=key_size,
     )
 
-    publkey = private_key.public_key()
+    publkey = privkey.public_key()
     return privkey, publkey
 
 
@@ -28,8 +28,10 @@ private_key, public_key = generate_key_pair()
 
 def encrypt_data(data):
     # Encrypt the data
+    data_bytes = data.encode('utf-8')
+
     return public_key.encrypt(
-        data,
+        data_bytes,
         padding.OAEP(
             mgf=padding.MGF1(algorithm=hashes.SHA256()),
             algorithm=hashes.SHA256(),
