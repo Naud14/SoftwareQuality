@@ -57,14 +57,28 @@ def add_member():
         '''
     send_query(conn, query, (membership_id, first_name, last_name, age, gender, weight, address, email, phone, registration_date))
     conn.close()
-    print("Member added successfully!")
+    # print("Member added successfully!")
+    print("Your new membership ID is: ", membership_id)
+    input()
     return True
 
 def update_member_information():
     print("TODO")
 
 def search_member():
-    print("TODO")
+    print("Search member")
+    membership_id = input("Enter the membership ID of the member to search: ")
+
+    try:
+        conn = get_connection()
+        if conn is not None:
+            query = "SELECT * FROM members WHERE membership_id = ?"
+            result = send_query(conn, query, (membership_id))
+            print(result)
+            input()
+    except Exception as e:
+        print("Failed to find member.")
+        print(e)
 
 def delete_member():
     print("Delete member")

@@ -8,10 +8,10 @@ BACKUP_DIR = 'backup'
 
 
 def create_backup():
-    backup_filename = os.path.join(BACKUP_DIR, f'backup_{datetime.now().strftime("%Y%m%d_%H%M%S")}.zip')
+    backup_filename = os.path.join(os.getcwd(), f'backup_{datetime.now().strftime("%Y%m%d_%H%M%S")}.zip')
     with zipfile.ZipFile(backup_filename, 'w') as backup_zip:
         backup_zip.write(DB_FILE)
-        backup_zip.write(LOG_FILE)
+        # backup_zip.write(LOG_FILE)
     print(f"Backup created: {backup_filename}")
 
 

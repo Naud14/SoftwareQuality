@@ -89,7 +89,6 @@ def super_admin_menu():
         reset_admin_password()
     elif choice == "10":
         create_backup()
-        pass
     elif choice == "11":
         # See logfiles
         see_logs()
