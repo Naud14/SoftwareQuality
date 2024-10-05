@@ -57,7 +57,7 @@ def delete_admin():
             result = send_query(conn, query, (username,))
             if result and result[0][0] == "system_admin":
                 delete_query = "DELETE FROM users WHERE username = ?"
-                send_query(conn, delete_query, (username,))
+                send_query(conn, delete_query, (username))
                 print("System admin deleted successfully")
             else:
                 print("User is not a system admin or does not exist!")
@@ -70,4 +70,37 @@ def delete_admin():
 
 
 def reset_admin_password():
-    print("TODO")
+    print("Reset system admin password")
+    username = input("Enter the username of the system admin whose password you want to reset: ")
+
+    try:
+        conn = get_connection()
+        if conn is not None:
+
+            query = "SELECT * FROM users WHERE username = ? AND role = ?"
+            result = send_query(conn, query, (username, "system_admin"))
+            if result:
+                while True:
+                    new_password = input("Enter new password: ")
+                    confirm_password = input("Confirm new password: ")
+                    
+                    if new_password != confirm_password:
+                        print("No match! Try again.")
+                    else:
+                        if validate_password(new_password):
+                            hashed_password = hash_password(new_password)
+                            
+                            # Update password in DB
+                            update_query = "UPDATE users SET password_hash = ? WHERE username = ? AND role = ?"
+                            send_query(conn, update_query, (hashed_password, username, "system_admin"))
+                            print("Password updated successfully.")
+                        else:
+                            print("Invalid password!")
+            else:
+                print("No system admin found")
+            conn.close()
+        else:
+            print("Failed to connect to the database.")
+    except Exception as e:
+        print("Failed to reset system admin password.")
+        print(e)
