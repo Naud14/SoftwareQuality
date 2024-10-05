@@ -67,4 +67,37 @@ def delete_consultant():
         print(e)
 
 def reset_consultant_password():
-    print("TODO") 
+    print("Reset consultant password")
+    username = input("Enter the username of the consultant whose password you want to reset: ")
+
+    try:
+        conn = get_connection()
+        if conn is not None:
+
+            query = "SELECT * FROM users WHERE username = ? AND role = ?"
+            result = send_query(conn, query, (username, "consultant"))
+            if result:
+                while True:
+                    new_password = input("Enter new password: ")
+                    confirm_password = input("Confirm new password: ")
+                    
+                    if new_password != confirm_password:
+                        print("No match! Try again.")
+                    else:
+                        if validate_password(new_password):
+                            hashed_password = hash_password(new_password)
+                            
+                            # Update password in DB
+                            update_query = "UPDATE users SET password_hash = ? WHERE username = ? AND role = ?"
+                            send_query(conn, update_query, (hashed_password, username, "consultant"))
+                            print("Password updated successfully.")
+                        else:
+                            print("Invalid password!")
+            else:
+                print("No system admin found")
+            conn.close()
+        else:
+            print("Failed to connect to the database.")
+    except Exception as e:
+        print("Failed to reset consultant password.")
+        print(e)
