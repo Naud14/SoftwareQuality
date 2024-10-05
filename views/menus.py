@@ -1,10 +1,11 @@
 from database.database import get_connection
 from database.auth import verify_login
+from database.backup import create_backup
 from logic.userlogic import update_password, get_user_overview
 from logic.memberlogic import add_member, update_member_information, search_member, delete_member
 from logic.consultantlogic import add_consultant, edit_consultant, delete_consultant, reset_consultant_password
 from database.logging import see_logs
-from logic.admin import update_admin, delete_admin, reset_admin_password
+from logic.admin import update_admin, delete_admin, reset_admin_password, create_admin
 
 
 
@@ -47,16 +48,17 @@ def super_admin_menu():
     print("3. Edit consultant")
     print("4. Delete consultant")
     print("5. Reset consultant password")
-    print("6. Update admin's account")
-    print("7. Delete admin's account")
-    print("8. Reset admin's password")
-    print("9. Make and restore backup of system")
-    print("10. See logfiles")
-    print("11. Add member")
-    print("12. Edit member")
-    print("13. Delete member")
-    print("14. Search member")
-    print("15. Logout")
+    print("6. Add new admin")
+    print("7. Update admin's account")
+    print("8. Delete admin's account")
+    print("9. Reset admin's password")
+    print("10. Make and restore backup of system")
+    print("11. See logfiles")
+    print("12. Add member")
+    print("13. Edit member")
+    print("14. Delete member")
+    print("15. Search member")
+    print("16. Logout")
     choice = input("Enter your choice: ")
     if choice == "1":
         # User overview
@@ -74,33 +76,36 @@ def super_admin_menu():
         # Reset consultant password
         reset_consultant_password()
     elif choice == "6":
+        # Add new admin
+        create_admin()
+    elif choice == "7":
         # Update admin's account
         update_admin()
-    elif choice == "7":
+    elif choice == "8":
         # Delete admin's account
         delete_admin()
-    elif choice == "8":
+    elif choice == "9":
         # reset admin's password
         reset_admin_password()
-    elif choice == "9":
-        # TODO make and restore backup system
-        pass
     elif choice == "10":
+        create_backup()
+        pass
+    elif choice == "11":
         # See logfiles
         see_logs()
-    elif choice == "11":
+    elif choice == "12":
         # Add member
         add_member()
-    elif choice == "12":
+    elif choice == "13":
         # Edit member
         update_member_information()
-    elif choice == "13":
+    elif choice == "14":
         # Delete member
         delete_member()
-    elif choice == "13":
+    elif choice == "15":
         # Search member
         search_member()
-    elif choice == "15":
+    elif choice == "16":
         main_menu()
     else:
         print("Invalid choice. Please try again.")
@@ -192,4 +197,4 @@ def consultant_menu(username):
         main_menu()
     else:
         print("Invalid choice. Please try again.")
-        consultant_menu()
+        consultant_menu(username)

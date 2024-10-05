@@ -1,3 +1,6 @@
+def create_admin():
+    print("TODO")
+
 def update_admin():
     print("TODO")
 
