@@ -47,7 +47,26 @@ def update_admin():
 
 
 def delete_admin():
-    print("TODO")
+    print("Delete system admin")
+    username = input("Enter username of system admin to delete: ")
+    try: 
+        conn = get_connection()
+        if(conn is not None):
+            # First check if user exists and is a system admin
+            query = "SELECT role FROM users WHERE username = ?"
+            result = send_query(conn, query, (username,))
+            if result and result[0][0] == "system_admin":
+                delete_query = "DELETE FROM users WHERE username = ?"
+                send_query(conn, delete_query, (username,))
+                print("System admin deleted successfully")
+            else:
+                print("User is not a system admin or does not exist!")
+            conn.close()
+        else:
+            print("Failed to connect to database")
+    except Exception as e:
+        print("Failed to delete system admin")
+        print(e)
 
 
 def reset_admin_password():
