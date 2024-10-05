@@ -51,9 +51,14 @@ def delete_consultant():
     try: 
         conn = get_connection()
         if(conn is not None):
-            query = "DELETE FROM users WHERE username = ?"
-            send_query(conn, query, (username,))
-            print("Consultant deleted successfully")
+            query = "SELECT role FROM users WHERE username = ?"
+            result = send_query(conn, query, (username,))
+            if result and result[0][0] == "consultant":
+                query = "DELETE FROM users WHERE username = ?"
+                send_query(conn, query, (username,))
+                print("Consultant deleted successfully")
+            else: 
+                print("User is not a consultant or does not exist")
             conn.close()
         else:
             print("Failed to connect to database")
