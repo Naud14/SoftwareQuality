@@ -9,7 +9,7 @@ def add_member():
         first_name = input("Enter your first name: ")
         last_name = input("Enter your last name: ")
 
-        if first_name.isalpha and last_name.isalpha: break
+        if first_name.isalpha() and last_name.isalpha(): break
         else: print("Invalid name(s), please try again!")
     while(True):
         age = input("Enter your age in years: ")
