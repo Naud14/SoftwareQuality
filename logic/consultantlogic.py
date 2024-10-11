@@ -65,7 +65,7 @@ def edit_consultant():
                 
                 if result:
                     role = result[0]
-                    if role == encrypt_data("consultant"):
+                    if role == encrypt_data("consultant") or "consultant":
                         print("Consultant found!")
                         break
                     else:

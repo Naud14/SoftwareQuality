@@ -59,7 +59,6 @@ def add_member():
     conn.close()
     # print("Member added successfully!")
     print("Your new membership ID is: ", membership_id)
-    input()
     return True
 
 def update_member_information():
