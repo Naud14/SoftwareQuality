@@ -1,4 +1,6 @@
 import re
+
+from database.database import get_connection
 cities = ["Rotterdam", "Oldenzaal", "Budapest", "Kathmandu", "Moskou", "Lelystad", "Stockholm", "Ruinerwold", "Liverpool", "Penemunde"]
 
 
@@ -30,6 +32,18 @@ def validate_phone(phone):
 
 def validate_username(username):
     # TODO check if username is unique and no distinquish between lowercase or uppercase letters
+    conn = get_connection()
+    if conn is None:
+        print("Failed to connect to database!")
+        return False
+    c = conn.cursor()
+    c.execute('SELECT username FROM users WHERE username = ?', (username))
+    conn.commit()
+    conn.close()
+
+    # If any username is found, return False
+    if len(c) != 0:
+        return False
 
     # no longer than 10 characters
     if len(username) > 10: return False
